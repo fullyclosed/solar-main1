@@ -1,0 +1,151 @@
+</html>
+
+<head>
+  <meta charset='utf-8' />
+  <%= wicked_pdf_stylesheet_link_tag "pdf" %>
+    <%= wicked_pdf_stylesheet_link_tag "https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css" %>
+      <%# <%=wicked_pdf_javascript_include_tag "number_pages" %>
+</head>
+<div class="container">
+  <div class="col-md-12">
+    <div class="invoice">
+      <!-- begin invoice-company -->
+      <%# <div class="invoice-company">
+        Company Name, Inc
+    </div> %>
+    <!-- end invoice-company -->
+    <!-- begin invoice-header -->
+    <div class="invoice-header">
+      <div class="invoice-from">
+        <b class="mb-2">Bill from:</b>
+        <p class="m-t-5 m-b-5 ml-6">
+          <strong class="text-inverse">
+            <%= @invoice.name %>
+          </strong><br>
+          <%= @invoice.address %><br>
+            <%= @invoice.city %>,<%= @invoice.postcode %><br>
+        </p>
+        <br>
+        <br>
+        <b class="mb-2">Bill to:</b>
+        <p class="m-t-5 m-b-5 ml-6">
+          <strong class="text-inverse">Sol Vida Energy Inc</strong><br>
+          1063 N Palm Canyon Dr
+          rancho mirage,<br>
+          CA, 922770<br>
+          United States<br>
+          Team: Solvida International
+        </p>
+      </div>
+      <div class="invoice-to">
+
+      </div>
+
+
+      <div class="invoice-to">
+
+      </div>
+
+
+      <div class="invoice-to">
+        <div style="background-color: #999;">
+          <div class="inv"><b>INVOICE</b></div>
+        </div>
+        <b class="mr-1">DOCUMENT:</b>
+        <%# <%= @invoice.payment_reference.gsub("Invoice", "INV-" ).gsub(" ", "") %>
+
+        <%= @invoice.document %><br>
+        <br>
+                <b class=" mr-1"> ISSUE DATE: </b>
+          <%= @invoice.issue_date %><br>
+            <b class="mr-1"> DUE DATE: </b>
+            <%= @invoice.due_date %><br>
+              <b class="mr-1"> TOTAL DUE:</b>
+              <%= @invoice.amount %>
+                <br>
+                <%# week number %>
+                  <b class="mr-1">PERIOD: </b>
+                  <%= @invoice.created_at.strftime("%U")%>
+      </div>
+    </div>
+    <div>
+      Contract:
+      <br>
+      <b>
+        <%= @invoice.name %>
+          <br>
+      </b>
+      <br>
+      Scope
+      <b>
+        <br>
+          <%= @invoice.scope %>
+        <br>
+      </b>
+    </div>
+    <div class="invoice-content">
+      <table class="table">
+        <thead>
+          <tr style="background-color: #999">
+            <th>DESCRIPTION / MEMO</th>
+            <th class="text-center" width="10%">AMOUNT</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <span class="text-inverse"><i><%= @invoice.description %></i>
+              </span><br>
+            </td>
+            <td></td>
+
+          </tr>
+          <tr>
+            <td>
+             
+            </td>
+            <td class="text-right">
+            </td>
+          </tr>
+          <tr>
+            <tr>
+              <td>
+                <span ><b><%= "Task: #{ @invoice.description }" %></b>
+                </span><br>
+              </td>
+              <td >$ <%= @invoice.amount %>
+              </td>
+            </tr>
+            <td>
+              <span><b>TOTAL DUE</b>
+              </span><br>
+            </td>
+            <td class=""><b>$ <%= @invoice.amount %></b>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+</div>
+
+<div class="fo">
+  <div>
+    
+  </div>
+  <div style="text-align: right;" class="pb-4 pt-6">
+    <b class="mt-6">
+      <%= @invoice.document %>
+    </b>
+  </div>
+   <div style="text-align: left;">
+    <b>
+      PAGE 1 OUT OF 1
+    </b>
+  </div>
+</div>
+
+
+
+</html>

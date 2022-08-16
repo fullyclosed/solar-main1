@@ -1,0 +1,37 @@
+<div class="is-flex is-justify-content-space-between	">
+  <h1 class="title">Invoices</h1>
+  <div>
+    <%= link_to "Generate invoices", new_invoice_path, class: "button is-primary" %>
+    <%# <%= link_to "Download ZIP", download_path(format: :pdf), target: "_blank", class: "button is-danger" %>
+  </div>
+</div>
+  <div class="is-flex is-justify-content-space-between	">
+    <%= form_tag download_path(format: :pdf), method: :get  do %>
+    <div class="is-flex is-justify-content-space-betwee mr-2 ml-2">
+    <label class="label mr-2">Between</label>
+        <%= date_field_tag :start_date, nil, placeholder: "Example: 10", class: 'input mr-2' %>
+        <label class="label mr-3">To</label>
+        <%= date_field_tag :end_date, nil, placeholder: "Example: 10", class: 'input mr-2' %>
+         <label class="label mr-3">Or last </label>
+        <%= number_field_tag :last, nil, placeholder: "Example: 10", class: 'input mr-2' %>
+        <%= submit_tag "Download",  class: "button is-danger"%>
+    </div>
+    <% end %>
+  </div>
+<div id="invoices">
+  <% @invoices.each do |invoice| %>
+      <div class="card mt-2 is-flex is-flex-direction-row is-justify-content-flex-end	">
+          <%= link_to "#{invoice.payment_reference}", invoice, class: "card-footer-item" %>
+          <%= link_to "View PDF", invoice_path(invoice, format: :pdf), target: "_blank", class:"card-footer-item" %>
+    <%= link_to "Download", invoice_path(invoice, download: :true, format: :pdf), class: "card-footer-item" %>
+          <%= button_to "Delete", invoice, method: :delete, class: "button is-danger m-2 delete card-footer-item" %>
+          
+
+      </div>
+  <% end %>
+  <div class="is-flex is-justify-content-center mt-6 mb-6">
+    <%= pagy_bulma_nav(@pagy).html_safe %>
+  </div>
+</div>
+
+

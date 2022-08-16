@@ -1,0 +1,7 @@
+<%= form_tag invoices_path, multipart: true do %>
+<div class="file mt-2 mb-2">
+ 
+        <%= file_field_tag :file, class: 'input button' %>
+</div>
+<%= submit_tag 'Import', class: 'button is-primary' %>
+<% end %>

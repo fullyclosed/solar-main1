@@ -1,0 +1,89 @@
+<% if true %>
+<div>
+  <h1 class="container center">
+    You have an amount 350 USD overdue, please pay
+  </h1>
+</div>
+<% else %>
+<!DOCTYPE html>
+  <body>
+    <html>
+      <head>
+        <title>Solar</title>
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <%= csrf_meta_tags %>
+        <%= csp_meta_tag %>
+        <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+        <script src="https://use.fontawesome.com/releases/v5.15.4/js/all.js" data-mutate-approach="sync"></script>
+        <%= javascript_importmap_tags %>
+      </head>
+      <nav class="navbar is-primary" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+         <%= link_to root_path do %>
+            <img src="https://i.ibb.co/qJwC3qt/FINAL-SOLVIDA-blanco.png" width="150" height="50">
+         
+          <% end %>
+
+          <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+          </a>
+        </div>
+
+        <div id="navbarBasicExample" class="navbar-menu">
+        <% if user_signed_in? %>
+          <div class="navbar-start">
+            <a class="navbar-item">
+                <%= link_to "Home", root_path, class: "navbar-item" %>
+            </a>
+
+            <div class="navbar-item has-dropdown is-hoverable">
+              <a class="navbar-link">
+                Tools
+              </a>
+
+              <div class="navbar-dropdown">
+                  <%= link_to "Invoice Generator", invoices_url, class: "navbar-item" %>
+                <a class="navbar-item">
+                  Quality Assurance
+                </a>
+              </div>
+            </div>
+          </div>
+        <% end %>
+
+          <div class="navbar-end">
+            <div class="navbar-item">
+             <% if user_signed_in? %>
+                          </i> Hi <b style="margin-left: 5px; margin-right: 10px;">@<%= current_user.first_name %>!
+             </b>
+                <div class="buttons">
+                <%= button_to "Logout", destroy_user_session_path, method: :delete, class: "button is-text" %>
+             </div>
+              <% else %>
+                <div class="buttons">
+                  <%= link_to "Login", new_user_session_path,  class: "button" %>
+                </div> 
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </nav>
+      <body>
+      <section class="section">
+        <div class="container">
+        <div class="is-flex is-flex-direction-row is-justify-content-space-between">
+          <p class="notice fadeInRight mb-6 is-warning" style="color: green;"><%= notice %></p>
+          <p class="alert fadeInRight" style="color: red"><%= alert %></p>
+       </div>
+        <%= yield %>
+        </div>
+      </section>
+      </body>
+    </html>
+  </body>
+</html>
+
+<% end %>
